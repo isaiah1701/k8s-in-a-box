@@ -14,6 +14,15 @@ Spin up a local Kubernetes (kind) cluster and get a **random broken app** to fix
 ## Quickstart
 
 ```bash
+# Option 1: one-command workflow (recommended)
+# runs setup, creates the cluster, and deploys a challenge
+# DIFFICULTY: easy|medium|hard, SEED optional (shareable)
+make deploy
+make deploy DIFFICULTY=medium SEED=424242
+make deploy DIFFICULTY=easy SEED=424091
+
+# Option 2: step-by-step workflow (manual control)
+
 # one-time
 make setup
 
@@ -21,24 +30,23 @@ make setup
 make cluster
 
 # generate + deploy a randomised challenge
-# DIFFICULTY: easy|medium|hard, SEED optional (shareable)
+make challenge
 make challenge DIFFICULTY=medium SEED=424242
 make challenge DIFFICULTY=easy SEED=424091
-# or random
-make challenge
 
 # read the scenario brief (symptoms, acceptance criteria)
 make brief
 
-# see what's up
+# inspect current cluster / workload state
 make status
 
 # (optional) get a nudge without revealing answers
 make hint
 
-# after you've fixed things, verify:
+# after you've fixed things, verify your solution
 make verify
-## if all checks pass, you can submit your solution.
+# if all checks pass, you can submit your solution
+
 ```
 
 ## To submit your solution (with evidence)

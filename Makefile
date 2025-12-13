@@ -48,7 +48,10 @@ challenge: sc-default
 	kubectl apply -f $(SCENARIO_DIR)/app-deploy.yaml
 	kubectl apply -f $(SCENARIO_DIR)/app-svc.yaml
 	kubectl apply -f $(SCENARIO_DIR)/busybox.yaml
-
+deploy:
+	$(MAKE) setup
+	$(MAKE) cluster
+	$(MAKE) challenge DIFFICULTY=$(DIFFICULTY) SEED=$(SEED)
 status:
 	$(KUBECTL) -n kbox get pods,svc,ep
 	@echo; echo "Recent events:"; \
