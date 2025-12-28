@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+
+# Generated manifests
+challenges/rendered/*
+
+# OS / editor junk
+.DS_Store
+.vscode/
+
+# env and secrets
+.env
+.env.local
+
+teacher/
+.teacher/
+
+challenges/rendered/*
+*.zip
+evidence-*.txt
+submission-*.zip
