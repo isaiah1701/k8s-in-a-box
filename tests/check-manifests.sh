@@ -12,18 +12,24 @@ echo
 
 # 1. YAML syntax
 echo "==> yamllint"
-yamllint "${MANIFEST_DIR}" || true
+if ! yamllint "${MANIFEST_DIR}"; then
+  echo "ERROR: yamllint failed. Fix YAML syntax issues above."
+fi
 echo
 
 # 2. Kubernetes schema validation
 echo "==> kubeconform"
-kubeconform -strict -summary "${MANIFEST_DIR}" || true
+if ! kubeconform -strict -summary "${MANIFEST_DIR}"; then
+  echo "ERROR: kubeconform failed. One or more manifests do not match the Kubernetes schema."
+fi
 echo
 
 # 3. Policy checks (only if policies exist)
 if [[ -d "${POLICY_DIR}" && "$(ls -A "${POLICY_DIR}")" ]]; then
   echo "==> conftest (OPA policies)"
-  conftest test "${MANIFEST_DIR}" || true
+  if ! conftest test "${MANIFEST_DIR}"; then
+    echo "ERROR: conftest failed. One or more policy violations were detected."
+  fi
 else
   echo "==> conftest skipped (no policies found)"
 fi
