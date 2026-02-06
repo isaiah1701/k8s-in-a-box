@@ -29,7 +29,9 @@ The following checks are performed:
 
 From the repository root, run:
 
-tests/check-manifests.sh
+1) chmod +x tests/check-manifests.sh to add execution permissions 
+
+tests/check-manifests.sh to run the script 
 
 This command can be run locally during development or as part of a CI pipeline.
 
