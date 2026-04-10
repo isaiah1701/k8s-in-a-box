@@ -75,8 +75,9 @@ OBJECTIVES = {
 }
 
 def pick_faults(difficulty, rng):
-    keys = list(FAULTS.keys())
-    return {"easy": rng.sample(keys,1), "medium": rng.sample(keys,2), "hard": rng.sample(keys,3)}[difficulty]
+    counts = {"easy": 1, "medium": 2, "hard": 3}
+    # random.sample keeps fault picks unique per challenge.
+    return rng.sample(list(FAULTS), counts[difficulty])
 
 def write_brief(seed, difficulty, chosen):
     now = datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")

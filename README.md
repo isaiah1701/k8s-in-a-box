@@ -41,6 +41,18 @@ make verify
 ## if all checks pass, you can submit your solution.
 ```
 
+## For Beginners
+
+If you're new to Kubernetes, start with an easy challenge:
+
+```bash
+make setup
+make cluster
+make challenge DIFFICULTY=easy
+make brief
+make status
+
+
 ## To submit your solution (with evidence)
 
 ```bash
