@@ -13,6 +13,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install tooling
         run: |
           sudo apt-get update
@@ -26,8 +31,17 @@ jobs:
             | tar -xz
           sudo mv conftest /usr/local/bin/
 
+      - name: Install Python dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -U pip
+          .venv/bin/pip install -r requirements.txt
+
       - name: Make manifest check script executable
         run: chmod +x tests/check-manifests.sh
+
+      - name: Gate duplicate challenge faults
+        run: .venv/bin/python tests/test_generate_challenge.py
 
       - name: Run manifest validation
         run: tests/check-manifests.sh
